@@ -12,8 +12,8 @@ class S3ClientClass implements S3ClientInterface
 
         $s3 = new S3Client([
             'credentials' => [
-                'key'      => '',
-                'secret'   => '',
+                'key'      => config('app.yandex_api_key'),
+                'secret'   => config('app.yandex_api_secret_key'),
             ],
             'version' => 'latest',
             'endpoint' => $endpointUrl,

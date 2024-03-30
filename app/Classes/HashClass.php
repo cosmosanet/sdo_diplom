@@ -11,4 +11,18 @@ class HashClass
 
     protected string $sha512;
 
+    public function getMD5()
+    {
+        return $this->md5;
+    }
+    public function getSHA1()
+    {
+        return $this->sha512;
+    }
+    public function getSHA512()
+    {
+        return $this->sha512;
+    }
+
+
 }

@@ -25,7 +25,8 @@ class FileController extends Controller
 
     public function fileUpload(): void
     {
-        $asd = $this->fileService->fileUpload('istutestbucket','istutestdoc.docx', 'asd');
+        $asd = $this->fileService->registerFile('istutestbucket', 'C:\Users\cosmosanet\Desktop\123\asdw.docx');
+        echo $asd;
     }
 }
 

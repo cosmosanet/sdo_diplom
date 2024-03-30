@@ -1,7 +1,9 @@
 <?php
 namespace App\Repositories;
 
+use App\Classes\HashClass;
 use App\Classes\S3ClientClass;
+use App\Models\File;
 
 class FileRepository
 {
@@ -21,7 +23,7 @@ class FileRepository
     }
 
     //Скачивание файлов в Object storage
-    public function fileUpload(string $bucket = "istutestbucket", string $objectKey = "istutestdoc.docx" , string $filePath = "C:\Users\cosmosanet\Desktop\istutestdoc.docx"): void
+    public function fileUpload(string $bucket, string $objectKey, string $filePath): void
     {
         $S3ClientClass = new S3ClientClass();
         $s3 = $S3ClientClass->GetS3ClientClient('s3', 'https://storage.yandexcloud.net/');
@@ -31,5 +33,13 @@ class FileRepository
             'Key'    => $objectKey,
             'SourceFile' => $filePath,
         ]);
+    }
+    ///id user временно.
+    public function createFileRecord(HashClass $hashsum, string $filemane): void
+    {
+        $md5 = $hashsum->getMD5();
+        $sha1 = $hashsum->getSHA1();
+        $sha512 =  $hashsum->getSHA512();
+        File::insert(['md5' => $md5, 'sha1' => $sha1, 'sha512' => $sha512, 'file_name'=> $filemane , 'id_user'=>1]);
     }
 }
