@@ -12,8 +12,8 @@ class S3ClientClass implements S3ClientInterface
 
         $s3 = new S3Client([
             'credentials' => [
-                'key'      => 'YCAJEtGL0_0UrZ8frQh43hmsw',
-                'secret'   => 'YCNP8JbDpSpo-QzOLwB9wk6dyNH4FvamkBdgDRv1',
+                'key'      => '',
+                'secret'   => '',
             ],
             'version' => 'latest',
             'endpoint' => $endpointUrl,
