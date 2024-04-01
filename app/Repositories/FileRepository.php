@@ -12,7 +12,6 @@ class FileRepository
     {
         $S3ClientClass = new S3ClientClass();
         $s3 = $S3ClientClass->GetS3ClientClient('s3', 'https://storage.yandexcloud.net/');
-
         $command =  $s3->getCommand('GetObject', [
             'Bucket' => $bucket,
             'Key'    => $objectKey,

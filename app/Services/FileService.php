@@ -18,7 +18,7 @@ class FileService
     public function fileDowload(string $bucket, string $objectKey, string $filePath): string
     {
         $fileUrl = $this->fileRepository->fileDowload($bucket, $objectKey, $filePath);
-
+        
         return $fileUrl;
     }
 

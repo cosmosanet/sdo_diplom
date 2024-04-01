@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Classes\S3ClientClass;
 use App\Services\FileService;
+use Illuminate\Support\Facades\Auth;
 
 require '..\vendor\autoload.php';
 
@@ -18,9 +19,13 @@ class FileController extends Controller
    
     public function fileDowload()
     {
-        $asd = $this->fileService->fileDowload('istutestbucket','istutestdoc.docx', 'asd');
-        echo '<a href="' . $asd . '">' . $asd . '</a>';
-
+        // $asd = $this->fileService->fileDowload('istutestbucket','istutestdoc.docx', 'asd');
+        // echo '<a href="' . $asd . '">' . $asd . '</a>';
+        if(Auth::check())
+        {
+            echo 'qwe';
+        }
+        else echo 'zxc';
     }
 
     public function fileUpload(): void
