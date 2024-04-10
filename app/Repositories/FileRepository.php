@@ -7,12 +7,11 @@ use App\Models\File;
 
 class FileRepository
 {
-    //Загрузка файлов в Object storage
+    //Скачивание файлов в Object storage
     public function fileDowload(string $bucket, string $objectKey, string $filePath): string
     {
         $S3ClientClass = new S3ClientClass();
         $s3 = $S3ClientClass->GetS3ClientClient('s3', 'https://storage.yandexcloud.net/');
-
         $command =  $s3->getCommand('GetObject', [
             'Bucket' => $bucket,
             'Key'    => $objectKey,
@@ -22,8 +21,8 @@ class FileRepository
         return $downloadUrl;
     }
 
-    //Скачивание файлов в Object storage
-    public function fileUpload(string $bucket, string $objectKey, string $filePath): void
+    //Загрузка файлов в Object storage
+    public function fileUpload(string $bucket, string $objectKey, string $fileContent): void
     {
         $S3ClientClass = new S3ClientClass();
         $s3 = $S3ClientClass->GetS3ClientClient('s3', 'https://storage.yandexcloud.net/');
@@ -31,15 +30,20 @@ class FileRepository
         $result = $s3->putObject([
             'Bucket' => $bucket,
             'Key'    => $objectKey,
-            'SourceFile' => $filePath,
+            'Body' => $fileContent,
         ]);
     }
-    ///id user временно.
+    public function getListOfFile(?int $userId)
+    {
+        return ($userId == null) ? File::get() : File::where('id_user', $userId)->get();
+    }
+    
+    ///Создание записи о файле в бд
     public function createFileRecord(HashClass $hashsum, string $filemane): void
     {
         $md5 = $hashsum->getMD5();
         $sha1 = $hashsum->getSHA1();
         $sha512 =  $hashsum->getSHA512();
-        File::insert(['md5' => $md5, 'sha1' => $sha1, 'sha512' => $sha512, 'file_name'=> $filemane , 'id_user'=>1]);
+        File::insert(['md5' => $md5, 'sha1' => $sha1, 'sha512' => $sha512, 'file_name'=> $filemane , 'id_user'=> session()->get('userId')]);
     }
 }

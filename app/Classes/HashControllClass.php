@@ -9,9 +9,9 @@ class HashControllClass extends HashClass implements HashControllInterfaces
     public function Get3HashSum(string $filePath): HashClass
     {
         $hash = new HashClass;
-        $hash->md5 = hash_file('md5', $filePath);
-        $hash->sha1 = hash_file('sha1', $filePath);
-        $hash->sha512 = hash_file('sha512', $filePath);
+        $hash->md5 = hash('md5', $filePath);
+        $hash->sha1 = hash('sha1', $filePath);
+        $hash->sha512 = hash('sha512', $filePath);
         return $hash;
     }
     

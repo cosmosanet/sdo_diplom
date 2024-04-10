@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('name_roles');
             $table->string('deception');
+            $table->string('yandex_secret_id');
         });
     }
 
