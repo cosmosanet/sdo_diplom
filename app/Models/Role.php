@@ -12,8 +12,9 @@ class Role extends Model
     protected $table = 'role';
     
     protected $fillable = [
-
+       'id',
        'name_roles',
        'deception',
+       'yandex_secret_id',
     ];
 }

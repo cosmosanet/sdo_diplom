@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');});
 
-    Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('index')->middleware('auth');
-    Route::get('/fileDowload', [App\Http\Controllers\FileController::class, 'fileDowload'])->name('fileDowload')->middleware('auth');
-    Route::get('/fileUpload', [App\Http\Controllers\FileController::class, 'fileUpload'])->name('fileUpload')->middleware('auth');
+    Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('index')->middleware('session');
+    Route::get('/fileDowload', [App\Http\Controllers\FileController::class, 'fileDowload'])->name('fileDowload');
+    Route::post('/fileUpload', [App\Http\Controllers\FileController::class, 'fileUpload'])->name('fileUpload');
 
     Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'])->name('register');
     Route::get('/login', [App\Http\Controllers\AuthController::class, 'loginpage'])->name('loginpage');

@@ -1,18 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\User;
+use App\Services\FileService;
+
 require '..\vendor\autoload.php';
-use Aws\S3\S3Client;
-use App\Classes\HashControllClass;
-use App\Classes\S3ClientClass;
-use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    protected $fileService;
+
+    public function __construct(FileService $fileService)
+    {
+        $this->fileService = $fileService;
+    }
+
     public function index()
     {
-    
-        return view('welcome');
-
+        $listOfFile = $this->fileService->getListOfFile(null);
+        return view('welcome', ['list' => $listOfFile]);
     }
 }

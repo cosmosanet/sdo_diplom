@@ -11,10 +11,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('password');
             $table->string('email')->unique();
-
-            $table->timestamps();
+            $table->unsignedBigInteger('id_role');
+            $table->foreign('id_role')->references('id')->on('role');
+            $table->timestamp('create_time')->useCurrent();
         });
        
     }

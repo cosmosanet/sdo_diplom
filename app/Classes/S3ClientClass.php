@@ -8,14 +8,10 @@ class S3ClientClass implements S3ClientInterface
 {
     public function GetS3ClientClient(string $serviceName, string $endpointUrl)
     {
-        // админ
-        // $asd = 't1.9euelZqYiZWdi5HMypWRmseXycrKyu3rnpWax5OexsmelM-QyZWRj46Mj8fl8_daYlpP-e9zJhEM_d3z9xoRWE_573MmEQz9zef1656VmpyLkMfMk5eUxpPKnpibmZCc7_zF656VmpyLkMfMk5eUxpPKnpibmZCc.WLx4qCFdIDf38CrONVRHEUTerTRLVOZrCNIImHNAN9rCqGWtUJHPX1fv-czlF7J0wnXw-6U2k2FjzC28BNZ_Ag';
-        $asd = 't1.9euelZqKzsuUiZ2RlJSMm8aRi5qci-3rnpWampHMk4zLkcqLyM-Szsubycbl9Pc-YlpP-e86aV6c3fT3fhBYT_nvOmlenM3n9euelZqeio-RjJuRy8uYi8mSnZbNl-_8xeuelZqeio-RjJuRy8uYi8mSnZbNlw.mY2zmuoTT9c_PGXNal6R8I4dSWuopjAbmp4m1niNYp0nxsigTk4uMvPOex2RKZkZYD9rdw4cMPil9KCxs-yqCA';
-        $apiKeys = $this->getApiKeys('e6qbb4jpl4i8ip9sj285', $asd);
         $s3 = new S3Client([
             'credentials' => [
-                'key'      => $apiKeys->key,
-                'secret'   => $apiKeys->textValue,
+                'key'      => session()->get('apiKey'),
+                'secret'   => session()->get('secretApiKey'),
             ],
             'version' => 'latest',
             'endpoint' => $endpointUrl,
@@ -34,7 +30,6 @@ class S3ClientClass implements S3ClientInterface
         $url = "https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/" . $secretId . "/payload";
         $headers = array(
             'Authorization: Bearer ' . $iAmKey,
-      
         );
 
         curl_setopt($curl, CURLOPT_URL, $url);
